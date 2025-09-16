@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
+  Button,
   Dimensions,
   Image,
   Modal,
@@ -176,28 +177,19 @@ const Movies = () => {
   };
 
   const handleDeleteMovie = async (id: string) => {
-    Alert.alert(
-      "Confirm Delete",
-      "Are you sure you want to delete this movie?",
-      [
-        { text: "Cancel", style: "cancel" },
-        {
-          text: "Delete",
-          style: "destructive",
-          onPress: async () => {
-            try {
-              await deleteMovie(id);
-              await fetchMovies();
-              Alert.alert("Deleted", "Movie deleted successfully.");
-            } catch (error) {
-              console.error('Error deleting movie:', error);
-              Alert.alert("Error", "Failed to delete movie. Try again.");
-            }
-          }
-        }
-      ]
-    );
-  };
+  try {
+    await deleteMovie(id);
+    await fetchMovies();
+    Alert.alert("Deleted", "Movie deleted successfully.");
+  } catch (error) {
+    console.error("Error deleting movie:", error);
+    Alert.alert("Error", "Failed to delete movie. Try again.");
+  }
+};
+
+// usage in button
+<Button title="Delete" onPress={() => handleDeleteMovie(movie.id)} />
+
 
   const openUpdateModal = (movie: Movie) => {
     setSelectedMovie(movie);
@@ -279,15 +271,12 @@ const Movies = () => {
                       onPress={() => openUpdateModal(movie)}
                     >
                       <Text style={styles.updateButtonText}>✏️ Edit</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={styles.deleteButton}
-                      onPress={() => handleDeleteMovie(movie.id)}
-                    >
-                      <Text style={styles.deleteButtonText}>🗑️ Delete</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={() => handleDeleteMovie(movie.id)}>
+      <Text style={{ color: "red" }}>Delete</Text>
+    </TouchableOpacity>
+  </View>
+</View>
               </View>
             </View>
           ))}
