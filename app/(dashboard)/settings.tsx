@@ -44,25 +44,11 @@ const Settings = () => {
   };
 
   const handleLogout = () => {
-    Alert.alert(
-      'Confirm Logout',
-      'Are you sure you want to logout?',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Yes, Logout',
-          style: 'destructive',
-          onPress: () => {
-            // TODO: Add actual logout logic (e.g., clear token, reset auth state)
-
-            // Navigate to login screen
-            router.replace('/login'); // ✅ Navigates to login.tsx and prevents going back
-          },
-        },
-      ],
-      { cancelable: true }
-    );
-  };
+  // TODO: Add actual logout logic (e.g., clear token, reset auth state)
+  
+  // Navigate to login screen
+  router.replace('/login'); // ✅ Navigates to login.tsx and prevents going back
+};
 
   return (
     <View style={styles.container}>
