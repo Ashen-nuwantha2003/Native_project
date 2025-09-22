@@ -12,6 +12,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TextInput,
   View,
 } from "react-native";
 
@@ -20,6 +21,7 @@ const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 const Home = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     fetchMovies();
@@ -36,6 +38,10 @@ const Home = () => {
       setLoading(false);
     }
   };
+
+  const filteredMovies = movies.filter((movie) =>
+    movie.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   if (loading) {
     return (
@@ -71,18 +77,32 @@ const Home = () => {
               </View>
             </View>
 
-            <Text style={styles.tagline}>Discover. Review. Share your favorites.</Text>
+            <Text style={styles.tagline}>
+              Discover. Review. Share your favorites.
+            </Text>
           </View>
         </ImageBackground>
       </View>
 
+      {/* 🔍 Search Bar */}
+      <View style={styles.searchContainer}>
+        <Ionicons name="search-outline" size={20} color="#9ca3af" />
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search movies..."
+          placeholderTextColor="#9ca3af"
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+        />
+      </View>
+
       {/* Movies */}
-      {movies.length === 0 ? (
+      {filteredMovies.length === 0 ? (
         <View style={styles.emptyContainer}>
           <Text style={styles.emptyIcon}>🎬</Text>
-          <Text style={styles.emptyTitle}>No movies yet</Text>
+          <Text style={styles.emptyTitle}>No movies found</Text>
           <Text style={styles.emptySubtitle}>
-            Start by adding your first movie review!
+            Try searching with a different name!
           </Text>
         </View>
       ) : (
@@ -91,7 +111,7 @@ const Home = () => {
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
         >
-          {movies.map((movie, index) => (
+          {filteredMovies.map((movie, index) => (
             <View
               key={movie.id}
               style={[styles.movieCard, { marginTop: index === 0 ? 0 : 16 }]}
@@ -112,17 +132,13 @@ const Home = () => {
                 <Text style={styles.title} numberOfLines={2}>
                   {movie.name} | ⭐ {movie.imdbRating}
                 </Text>
+                <Text style={styles.meta}>🎬 Director: {movie.director}</Text>
+                <Text style={styles.meta}>Actors: {movie.actors}</Text>
                 <Text style={styles.meta}>
-                  🎬 Director: {movie.director} 
-                </Text>
-                <Text style={styles.meta}>
-                  Actors: {movie.actors}
-                </Text>
-                <Text style={styles.meta}>
-                 Genres: {movie.genres} | {movie.released}
+                  Genres: {movie.genres} | {movie.released}
                 </Text>
                 <Text style={styles.description} numberOfLines={3}>
-                 Description: {movie.description}
+                  Description: {movie.description}
                 </Text>
               </View>
             </View>
@@ -202,6 +218,24 @@ const styles = StyleSheet.create({
     color: "rgba(255,255,255,0.9)",
     marginTop: 8,
     textAlign: "center",
+  },
+
+  // 🔍 Search
+  searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#1f1f1f",
+    marginHorizontal: 16,
+    marginBottom: 12,
+    borderRadius: 12,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+  },
+  searchInput: {
+    flex: 1,
+    marginLeft: 8,
+    fontSize: 15,
+    color: "#fff",
   },
 
   // Movie List
