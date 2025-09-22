@@ -218,9 +218,9 @@ const Register = () => {
                   </View>
 
                   <View style={styles.logoRow}>
-                    <Text style={styles.movieText}>Movie</Text>
+                    <Text style={styles.movieText}>Cine</Text>
                     <View style={styles.hubBox}>
-                      <Text style={styles.hubText}>Hub</Text>
+                      <Text style={styles.hubText}>Scope</Text>
                     </View>
                   </View>
 

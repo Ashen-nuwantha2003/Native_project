@@ -174,7 +174,7 @@ const Login = () => {
           letterSpacing: -0.5,
         }}
       >
-        Movie
+        Cine
       </Text>
       <View
         style={{
@@ -194,7 +194,7 @@ const Login = () => {
             letterSpacing: -0.5,
           }}
         >
-          Hub
+          Scope
         </Text>
       </View>
     </View>

@@ -1,18 +1,17 @@
 
 
-# 📚 StoryShelf – Book Review App
+# CineScope - Movie Review App
 
-StoryShelf is a mobile app that lets readers discover, review, and share books with a global community. Users can browse books, leave reviews, rate titles, and get personalized recommendations to enhance their reading journey.  
+ 
 
 ---
 
 ## 🚀 Features
-- 📚 Add and browse book reviews  
-- ✍️ Rate and comment on books  
-- 🔍 Search and filter by title, author, or genre  
-- 👤 User authentication & profile management  
-- ⭐ Personalized reading recommendations  
-- 📱 Responsive and user-friendly design  
+-  Add movie reviews  
+-  delete,update Movies 
+-  can rate
+-  User authentication & profile management    
+-  Responsive and user-friendly design  
 
 ---
 
@@ -33,8 +32,6 @@ StoryShelf is a mobile app that lets readers discover, review, and share books w
    cd storyshelf
 
 
-Purpose:
-This project is built to encourage readers to share their thoughts on books, help others discover new reads, and foster a global community of literature enthusiasts.
 
 *Install dependencies
 npm install
