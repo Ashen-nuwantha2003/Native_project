@@ -129,52 +129,44 @@ const Movies = () => {
   };
 
   const handleUpdateMovie = async () => {
-    if (!updateName.trim() || !updateDirector.trim() || !updateDescription.trim() || !selectedMovie) {
-      Alert.alert('Error', 'Please fill in required fields: name, director, description');
-      return;
-    }
+  if (
+    !updateName.trim() ||
+    !updateDirector.trim() ||
+    !updateDescription.trim() ||
+    !selectedMovie
+  ) {
+    console.warn("Please fill in required fields: name, director, description");
+    return;
+  }
 
-    Alert.alert(
-      "Confirm Update",
-      "Are you sure you want to update this movie?",
-      [
-        { text: "Cancel", style: "cancel" },
-        {
-          text: "Yes, Update",
-          style: "default",
-          onPress: async () => {
-            try {
-              setLoading(true);
-              const updatedMovie: Partial<Movie> = {
-                name: updateName.trim(),
-                director: updateDirector.trim(),
-                genres: updateGenres.trim(),
-                actors: updateActors.trim(),
-                released: updateReleased.trim(),
-                description: updateDescription.trim(),
-                imdbRating: updateImdbRating,
-                imageUrl: updateImageUrl.trim() || undefined,
-                updatedAt: new Date().toISOString(),
-              };
+  try {
+    setLoading(true);
 
-              await updateMovie(selectedMovie.id, updatedMovie);
+    const updatedMovie: Partial<Movie> = {
+      name: updateName.trim(),
+      director: updateDirector.trim(),
+      genres: updateGenres.trim(),
+      actors: updateActors.trim(),
+      released: updateReleased.trim(),
+      description: updateDescription.trim(),
+      imdbRating: updateImdbRating,
+      imageUrl: updateImageUrl.trim() || undefined,
+      updatedAt: new Date().toISOString(),
+    };
 
-              setUpdateModalVisible(false);
-              setSelectedMovie(null);
+    await updateMovie(selectedMovie.id, updatedMovie);
 
-              await fetchMovies();
-              Alert.alert('Success', 'Movie updated successfully!');
-            } catch (error) {
-              console.error('Error updating movie:', error);
-              Alert.alert('Error', 'Failed to update movie. Please try again.');
-            } finally {
-              setLoading(false);
-            }
-          }
-        }
-      ]
-    );
-  };
+    setUpdateModalVisible(false);
+    setSelectedMovie(null);
+
+    await fetchMovies();
+    console.log("Movie updated successfully!");
+  } catch (error) {
+    console.error("Error updating movie:", error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleDeleteMovie = async (id: string) => {
   try {
