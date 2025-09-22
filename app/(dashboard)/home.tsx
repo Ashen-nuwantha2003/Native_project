@@ -65,9 +65,9 @@ const Home = () => {
             </View>
 
             <View style={styles.logoRow}>
-              <Text style={styles.movieText}>Movie</Text>
+              <Text style={styles.movieText}>Cine</Text>
               <View style={styles.hubBox}>
-                <Text style={styles.hubText}>Hub</Text>
+                <Text style={styles.hubText}>Scope</Text>
               </View>
             </View>
 
@@ -110,16 +110,19 @@ const Home = () => {
               {/* Info */}
               <View style={styles.infoSection}>
                 <Text style={styles.title} numberOfLines={2}>
-                  {movie.name}
+                  {movie.name} | ⭐ {movie.imdbRating}
                 </Text>
                 <Text style={styles.meta}>
-                  🎬 {movie.director} | ⭐ {movie.imdbRating}
+                  🎬 Director: {movie.director} 
                 </Text>
                 <Text style={styles.meta}>
-                  {movie.genres} | {movie.released}
+                  Actors: {movie.actors}
+                </Text>
+                <Text style={styles.meta}>
+                 Genres: {movie.genres} | {movie.released}
                 </Text>
                 <Text style={styles.description} numberOfLines={3}>
-                  {movie.description}
+                 Description: {movie.description}
                 </Text>
               </View>
             </View>
